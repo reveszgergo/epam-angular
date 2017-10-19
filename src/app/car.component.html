@@ -1,0 +1,45 @@
+<h1>Cars</h1>
+<h3 *ngIf="articleIdToUpdate; else create">
+  Update Article for Id: {{articleIdToUpdate}}
+</h3>
+<ng-template #create>
+  <h3> Create New Car </h3>
+</ng-template>
+<div>
+  <form [formGroup]="carForm" (ngSubmit)="onCarFormSubmit()">
+    <table>
+      <tr><td>Enter Type</td><td><input formControlName="type">
+        <label *ngIf="carForm.get('type').invalid && processValidation" [ngClass] = "'error'"> Type is required. </label>
+      </td></tr>
+      <tr><td>Enter Price</td><td><input formControlName="price">
+        <label *ngIf="carForm.get('price').invalid && processValidation" [ngClass] = "'error'"> Price is required. </label>
+      </td></tr>
+      <tr><td colspan="2">
+        <button *ngIf="!articleIdToUpdate">CREATE</button>
+      </td></tr>
+    </table>
+  </form>
+  <br/>
+  <div *ngIf="statusCode; else processing">
+    <div *ngIf="statusCode === 201" [ngClass] = "'success'">
+      Article added successfully.
+    </div>
+    <div *ngIf="statusCode === 409" [ngClass] = "'success'">
+      Article already exists.
+    </div>
+    <div *ngIf="statusCode === 204" [ngClass] = "'success'">
+      Article deleted successfully.
+    </div>
+    <div *ngIf="statusCode === 500" [ngClass] = "'error'">
+      Internal Server Error.
+    </div>
+  </div>
+</div>
+<h3>Car Details</h3>
+<table>
+  <tr><th> Id</th> <th>Type</th><th>Price</th><th></th><th></th></tr>
+  <tr *ngFor="let car of allCars" >
+    <td>{{car.id}}</td> <td>{{car.type}}</td> <td>{{car.price}}</td>
+    <td><button type="button" (click)="deleteCar(car.id)">Delete</button></td>
+  </tr>
+</table>
