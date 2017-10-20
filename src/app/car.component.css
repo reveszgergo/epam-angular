@@ -23,6 +23,8 @@ input {
   font-size:17px;
 }
 button {
+  margin-left: 35%;
+  margin-top: 5%;
   background-color: #008CBA;
   color: white;
 }
@@ -31,6 +33,17 @@ button {
   font-size: 20px;
 }
 .success{
+  margin-left: 30%;
   color: green;
   font-size: 20px;
+}
+
+.navbar-inverse{
+  background: black;
+  border-color: black;
+}
+
+hr {
+  margin-left: 10%;
+  width: 50%;
 }
